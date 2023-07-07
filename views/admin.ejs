@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('partials/head') %>
+
+		<title>Movie Project</title>
+	</head>
+	<body>
+		<%- include('partials/nav') %>
+
+		<h1>Admin</h1>
+		<p>Welcome, <%= username %></p>
+
+		<p><a href="/create">Create a New Book</a></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Rating</th>
+					<th colspan="2">Actions</th>
+				</tr>
+			</thead>
+			<% for (book of books) { %>
+			<tr>
+				<td><%= book.title %></td>
+				<td><%= book.author %></td>
+				<td><%= book.rating %></td>
+				<td><a href="/edit/<%= book._id %>">Edit</a></td>
+				<td><a href="/delete/<%= book._id %>">Delete</a></td>
+			</tr>
+			<% } %>
+			<tbody></tbody>
+		</table>
+	</body>
+</html>

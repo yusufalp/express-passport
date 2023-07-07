@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<%- include('head') %>
+		<%- include('partials/head') %>
 
 		<title>Login</title>
 	</head>
 	<body>
-		<form class="signup-form" action="/signup" method="POST">
-			<div class="form-label-input">
+		<%- include('partials/nav') %>
+
+		<h1>Signup</h1>
+		<form action="/signup" method="POST">
+			<div>
 				<label for="firstName">First Name</label>
 				<input type="text" name="firstName" id="firstName" required />
 			</div>
-			<div class="form-label-input">
+			<div>
 				<label for="lastName">Last Name</label>
 				<input type="text" name="lastName" id="lastName" required />
 			</div>
-			<div class="form-label-input">
+			<div>
 				<label for="username">Username</label>
 				<input type="text" name="username" id="username" required />
 			</div>
-			<div class="form-label-input">
+			<div>
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" required />
 			</div>
