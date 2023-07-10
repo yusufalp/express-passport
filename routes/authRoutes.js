@@ -1,5 +1,8 @@
 const express = require('express');
 const passport = require('passport');
+const crypto = require('crypto');
+
+const User = require('../models/userModel');
 
 const router = express.Router();
 
@@ -48,11 +51,20 @@ router.post('/signup', (req, res, next) => {
       strategy
     });
 
-    await newUser.save();
+    try {
+      await newUser.save();
+    } catch (err) {
+      if (err.code === 11000 && err.keyPattern.username) {
+        // Duplicate key error for the username field
+        res.status(400).json({ error: 'Username already exists.' });
+      } else {
+        res.status(500).json({ error: 'Internal server error.' });
+      }
+    }
 
-    req.login(newUser, (error) => {
-      if (error) {
-        return next(error);
+    req.login(newUser, (loginError) => {
+      if (loginError) {
+        return next(loginError);
       }
       res.redirect('/');
     });
